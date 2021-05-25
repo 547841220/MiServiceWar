@@ -137,9 +137,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="image" class="col-sm-2 control-label">商品图片</label>
+                            <label for="chooseImage" class="col-sm-2 control-label">商品图片</label>
                             <div class="col-sm-10">
-                                <input type="file" class="form-control" id="image"/>
+                                <input type="file" class="form-control" id="chooseImage" name="file"/>
+                                <!--回显-->
+                                <img src="#" id="showImage" style="width: 100px;height:100px;display: none;" />
+                                <!--提交的时候，传给服务器端的地址-->
+                                <input type="hidden" name="product.image" id="image" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -150,9 +154,16 @@
                         </div>
                         <div class="form-group">
                             <label for="productDesc" class="col-sm-2 control-label">商品描述</label>
+                            <!--给用户看的-->
                             <div class="col-sm-10">
-                                <textarea class="form-control" rows="3" id="productDesc" name="productDesc"></textarea>
+                                <div id="editor">
+                                    请输入商品的详情介绍
+                                </div>
+                                <!--提交到服务器的内容-->
+                                <input type="hidden" id="productDesc" name="productDesc" />
                             </div>
+
+
                         </div>
 
                     </form>
@@ -170,6 +181,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <!--引入uploadify-->
     <script src="js/jquery.uploadifive.js" type="text/javascript" ></script>
+    <!--引入富文本js-wang-->
+    <script src="https://cdn.jsdelivr.net/npm/wangeditor@latest/dist/wangEditor.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function (){
             $("#to-add").click(function(){
@@ -181,7 +194,10 @@
         })
         //添加功能
         $("#add").click(function (){
-            let formData = new FormData();
+            //将富文本的内容获取到并且赋值给隐藏框
+            var content = editor.txt.html();
+            $("#productDesc").val(content);
+
             $("#addForm").submit();
         })
         //为一批修改按钮绑定事件
@@ -194,16 +210,43 @@
         })
 
         //初始化文件上传按钮
-        $('#image').uploadifive({
+        $('#chooseImage').uploadifive({
             'uploadScript':'file/upload',
             'fileObjName':'file',
             //回调函数，onUploadComplete
             'onUploadComplete':function (file,data){
-                alert('the file'+file.name+'uploaded successfully');
-                alert("data"+data);
+                //返回是一个字符串不是一个对象。
+                alert(data);
+                //将返回的字符串转化为JSON对象
+                var dataJson = JSON.parse(data);
+                //设置图片回显
+                if(dataJson.statusCode == 200) {
+                    $("#showImage").attr("src",dataJson.data).show();
+                    //设置提交的图片地址
+                    $("#image").val(dataJson.data);
+                } else{
+                    alert(dataJson.msg);
+                }
             }
-
         });
+        //初始化富文本框
+        var E = window.wangEditor;
+        const editor = new E('#editor');
+        editor.config.menus = [
+            'head',
+            'bold',
+            'fontName',
+            'justify',
+            'image',
+            'video',
+            'undo',
+            'redo',
+        ]
+        // 配置 server 接口地址
+        editor.config.uploadImgServer = '/file/multiUpload';
+        editor.config.uploadFileName = 'files';
+        editor.create();
+
 
     </script>
 </body>

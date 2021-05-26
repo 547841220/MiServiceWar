@@ -52,6 +52,13 @@
             <artifactId>fastdfs-client</artifactId>
             <version>1.26.1-RELEASE</version>
         </dependency>
+
+        <!--自动生成基础代码-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+        </dependency>
         
 
 

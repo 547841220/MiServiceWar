@@ -12,7 +12,7 @@ import java.util.Properties;
  * @author jijie
  * @Date 2021/5/17 11:11
  */
-@Configuration
+//@Configuration
 public class CommonConfig {
     
     @Bean

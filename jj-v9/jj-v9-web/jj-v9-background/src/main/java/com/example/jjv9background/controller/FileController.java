@@ -44,18 +44,16 @@ public class FileController {
             //2.把服务器的文件保存地址返回给客户端
             String fullPath = storePath.getFullPath();
             String path = new StringBuffer(image_server).append(fullPath).toString();
-            return ResultBean.success(path);
+            return new ResultBean("200",path);
         } catch (IOException e) {
             e.printStackTrace();
-            return ResultBean.error("您的网络当前不畅通，请稍后再试！");
+            return new ResultBean("500","您的网络当前不畅通，请稍后再试！");
         }
     }
 
     @RequestMapping("multiUpload")
     @ResponseBody
-    public MultiUploadBean multiUpload(MultipartFile[] files){
-
-        MultiUploadBean resultBean = new MultiUploadBean();
+    public ResultBean multiUpload(MultipartFile[] files){
 
         String[] data = new String[files.length];
 
@@ -75,14 +73,11 @@ public class FileController {
 
             } catch (IOException e) {
                 e.printStackTrace();
-                resultBean.setErrno("-1");
-                return resultBean;
+                return new ResultBean("500","上传失败");
             }
         }
 
-        resultBean.setErrno("0");
-        resultBean.setData(data);
-        return resultBean;
+        return new ResultBean("200",data);
 
     }
 }

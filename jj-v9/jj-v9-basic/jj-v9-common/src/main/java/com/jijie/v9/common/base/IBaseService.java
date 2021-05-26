@@ -1,5 +1,7 @@
 package com.jijie.v9.common.base;
 
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 /**
@@ -23,4 +25,6 @@ public interface IBaseService<T> {
     int updateByPrimaryKey(T t);
 
     List<T> list();
+
+    PageInfo<T> page(Integer pageIndex, Integer pageSize);
 }

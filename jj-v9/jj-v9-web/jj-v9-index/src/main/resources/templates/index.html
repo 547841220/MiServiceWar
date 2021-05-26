@@ -203,18 +203,18 @@
     商品分类快捷
   </a>
   <div class="kj-show2">
-    <div class="kj-info1" mg="shiping" th:mg="|shiping${productType.id}|" th:each="productType : ${list}" th:if="${productType.pid==0}">
+    <div class="kj-info1" mg="shiping" th:mg="|shiping${productType.id}|" th:each="productType:${list}" th:if="${productType.pid==0}">
       <dl class="kj-dl1">
         <!--一级标题-->
         <dt><a href="#" th:text="${productType.name}">食品/饮料/酒水</a></dt>
       </dl>
       <div class="kj-if-show" mg2="shiping" th:mg2="|shiping${productType.id}|">
-        <dl th:each="sonType : ${list}" th:if="${sonType.pid == productType.id}">
+        <dl th:each="sonType:${list}" th:if="${sonType.pid == productType.id}" >
           <!--二级标题-->
           <dt th:text="${sonType.name}">零食/糖果/巧克力</dt>
           <dd>
             <!--三级标题-->
-            <a href="#" th:each="grandSonType : ${list}" th:if="${grandSonType.pid == sonType.id}" th:text="${grandSonType.name}">坚果迷线</a>
+            <a href="#" th:each="grandSonType:${list}" th:if="${grandSonType.pid == sonType.id}" th:text="${grandSonType.name}">坚果迷线</a>
           </dd>
           <div style="clear:both;"></div>
         </dl>
@@ -1441,18 +1441,14 @@
 
 <script type="text/javascript">
 
-  function deal(data) {
-    console.log(data);
-  }
-
   $(function () {
     //异步加载分类信息，然后解析服务端返回的json，渲染出分类信息
-    /*$.ajax({
+    $.ajax({
         url:"index/listType",
         success:function(data){
             console.log(data);
         }
-    });*/
+    });
 
     //异步调用登录状态查询接口，验证用户登录状态
     //控制了ajax的方式，默认不允许跨域访问
@@ -1465,14 +1461,14 @@
         jsonpCallback:"deal"
     });*/
 
-    $.ajax({
+    /*$.ajax({
       url:"http://sso.qf.com:9095/sso/checkIsLogin",
       crossDomain:true,
       xhrFields:{withCredentials:true},
       success:function(data){
         console.log(data);
       }
-    })
+    })*/
   })
 
 

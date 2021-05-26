@@ -1,5 +1,8 @@
 package com.jijie.v9.common.base;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import java.util.List;
 
 /**
@@ -45,5 +48,13 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T>{
     @Override
     public List<T> list() {
         return getBaseDao().list();
+    }
+
+    @Override
+    public PageInfo<T> page(Integer pageIndex, Integer pageSize) {
+        PageHelper.startPage(pageIndex,pageSize);
+        List<T> list = this.list();
+        PageInfo<T> pageInfo = new PageInfo<T>(list,3);
+        return pageInfo;
     }
 }

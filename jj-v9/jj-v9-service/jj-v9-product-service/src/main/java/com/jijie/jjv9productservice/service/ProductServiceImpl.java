@@ -37,13 +37,6 @@ public class ProductServiceImpl extends BaseServiceImpl<TProduct> implements IPr
         return productMapper;
     }
 
-    @Override
-    public PageInfo<TProduct> page(Integer pageIndex, Integer pageSize) {
-        PageHelper.startPage(pageIndex,pageSize);
-        List<TProduct> list = productMapper.list();
-        PageInfo<TProduct> pageInfo = new PageInfo<TProduct>(list,3);
-        return pageInfo;
-    }
 
     @Override
     public Long add(ProductVO productVO) {

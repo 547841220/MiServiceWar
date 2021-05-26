@@ -14,7 +14,7 @@ import com.jj.entity.TProduct;
 public interface IProductService extends IBaseService<TProduct> {
 
 
-    PageInfo<TProduct> page(Integer pageIndex, Integer pageSize);
+    //PageInfo<TProduct> page(Integer pageIndex, Integer pageSize);
 
 
     Long add(ProductVO productVO);

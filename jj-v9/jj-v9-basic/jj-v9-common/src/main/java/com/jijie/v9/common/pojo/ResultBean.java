@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 @AllArgsConstructor
-public class ResultBean<T> {
+public class ResultBean<T> implements Serializable{
 
     //返回状态码
     private String statusCode;

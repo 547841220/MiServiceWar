@@ -18,6 +18,8 @@ public interface IBaseDao<T> {
 
     T selectByPrimaryKeySelective(T t);
 
+    T selectByPrimaryKey(Long id);
+
     int updateByPrimaryKeySelective(T t);
 
     int updateByPrimaryKey(T t);

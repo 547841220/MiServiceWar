@@ -35,6 +35,10 @@ public abstract class BaseServiceImpl<T> implements IBaseService<T>{
         return getBaseDao().selectByPrimaryKeySelective(t);
     }
 
+    public T selectByPrimaryKey(Long id) {
+        return getBaseDao().selectByPrimaryKey(id);
+    }
+
     @Override
     public int updateByPrimaryKeySelective(T t) {
         return getBaseDao().updateByPrimaryKeySelective(t);

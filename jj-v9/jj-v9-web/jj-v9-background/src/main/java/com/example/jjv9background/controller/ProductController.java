@@ -46,11 +46,20 @@ public class ProductController {
 
     @PostMapping("add")
     public String add(ProductVO productVO){
-        //
+        //处理核心业务逻辑T1
         //productService.add(productVO);
         //productService.add(productVO.getProduct(),productVO.getProductDesc());
         //返回添加后的商品ID
         Long productId = productService.add(productVO);
+        //去调用其他系统的接口
+        //java 调用http接口 Apache HttpClient
+        //http://localhost:9093/item/createById/10 --更新详情系统 //T2
+        //http://localhost:9092/search/synAllData  --更新搜索系统 //T3
+
+
+        //新方案，消息中间件
+        //发送一个消息。
+
         //商品id后续有用
         return "redirect:/product/page/1/1";
     }

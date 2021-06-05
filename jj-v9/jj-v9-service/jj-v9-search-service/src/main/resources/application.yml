@@ -36,6 +36,9 @@ dubbo:
   protocol:
     port: 28802
 
+server:
+  port: 8081
+
 
 
 

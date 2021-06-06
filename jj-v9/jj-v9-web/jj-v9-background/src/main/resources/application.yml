@@ -1,0 +1,37 @@
+dubbo:
+  application:
+    name: background
+  registry:
+    protocol: zookeeper
+    address: 192.168.109.132:2181
+server:
+  port: 9090
+
+spring:
+  thymeleaf:
+    cache: false
+  rabbitmq:
+    host: 192.168.109.132
+    port: 5672
+    username: java1907
+    password: 123
+    virtual-host: java1907
+
+#上传文件
+#配置fdfs文件客户端
+#读取文件超时时间1500ms
+fdfs:
+  so-timeout: 1500
+#连接跟踪器超时时间600ms
+  connect-timeout: 600
+  #fdfs内部连接池
+  pool:
+    jmx-enabled: false
+  thumb-image:
+    height: 100
+    width: 100
+  #跟踪器地址
+  tracker-list: 192.168.109.132:22122
+
+image:
+  server: http://192.168.109.132/
